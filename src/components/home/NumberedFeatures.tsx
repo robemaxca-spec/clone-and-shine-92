@@ -34,6 +34,35 @@ const features = [
 ];
 
 export const NumberedFeatures = () => {
+  const [visibleItems, setVisibleItems] = useState<number[]>([]);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers = itemRefs.current.map((ref, index) => {
+      if (!ref) return null;
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                setVisibleItems((prev) => [...new Set([...prev, index])]);
+              }, index * 150); // Stagger animation
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      
+      observer.observe(ref);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer?.disconnect());
+    };
+  }, []);
+
   return (
     <section className="py-20 relative bg-background">
       <div
@@ -44,13 +73,18 @@ export const NumberedFeatures = () => {
       />
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {features.map((feature) => (
+          {features.map((feature, index) => (
             <div
               key={feature.number}
-              className="flex gap-6 group hover:transform hover:scale-105 transition-all duration-300"
+              ref={(el) => (itemRefs.current[index] = el)}
+              className={`flex gap-6 group hover:transform hover:scale-105 transition-all duration-500 ${
+                visibleItems.includes(index)
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
             >
               <div className="flex-shrink-0">
-                <div className="w-20 h-20 bg-primary flex items-center justify-center">
+                <div className="w-20 h-20 bg-primary flex items-center justify-center transition-all duration-300 group-hover:bg-gold-hover">
                   <span className="text-5xl font-bold text-primary-foreground">{feature.number}</span>
                 </div>
               </div>
