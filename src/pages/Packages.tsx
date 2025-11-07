@@ -77,7 +77,8 @@ export default function Packages() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2670')",
-            filter: `blur(${scrollY * 0.02}px) brightness(0.3)`,
+            filter: `blur(${scrollY * 0.02}px) brightness(0.2)`,
+            opacity: 0.8,
           }}
         />
         <div className="relative z-10 text-center px-4">
@@ -89,9 +90,10 @@ export default function Packages() {
       {/* Packages Grid */}
       <section className="py-20 relative">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-5"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2574')",
+            opacity: 0.05,
           }}
         />
         <div className="container mx-auto px-4 relative z-10">
@@ -105,19 +107,19 @@ export default function Packages() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {packages.map((pkg, index) => (
                 <div
                   key={index}
-                  className={`relative bg-card/30 backdrop-blur-sm p-8 border-2 transition-all duration-300 ${
+                  className={`relative bg-card/30 backdrop-blur-sm p-8 rounded-2xl border-2 transition-all duration-300 ${
                     pkg.highlighted
-                      ? "border-primary scale-105 lg:scale-110"
+                      ? "border-primary shadow-xl shadow-primary/20"
                       : "border-border hover:border-primary"
                   }`}
                 >
                   {pkg.highlighted && (
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-primary text-primary-foreground px-4 py-1 text-sm font-bold uppercase tracking-wider">
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+                      <span className="bg-primary text-primary-foreground px-4 py-1 text-sm font-bold uppercase tracking-wider rounded-full">
                         Most Popular
                       </span>
                     </div>
@@ -127,25 +129,25 @@ export default function Packages() {
                     <h3 className="text-2xl font-bold text-foreground mb-2 uppercase tracking-wide">
                       {pkg.name}
                     </h3>
-                    <p className="text-muted-foreground text-sm mb-4">{pkg.description}</p>
+                    <p className="text-muted-foreground text-sm mb-4 min-h-[40px]">{pkg.description}</p>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-5xl font-bold text-primary">{pkg.price}</span>
-                      <span className="text-muted-foreground">/ {pkg.period}</span>
+                      <span className="text-4xl font-bold text-primary">{pkg.price}</span>
+                      <span className="text-muted-foreground text-sm">/ {pkg.period}</span>
                     </div>
                   </div>
 
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-3 mb-8 min-h-[300px]">
                     {pkg.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-3">
                         <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground">{feature}</span>
+                        <span className="text-foreground text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
 
                   <Link to="/contact">
                     <Button
-                      className={`w-full ${
+                      className={`w-full rounded-lg ${
                         pkg.highlighted
                           ? "bg-primary hover:bg-primary/90"
                           : "bg-secondary hover:bg-secondary/90"
@@ -164,7 +166,7 @@ export default function Packages() {
                 Need a custom package? Contact us for a tailored solution.
               </p>
               <Link to="/contact">
-                <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-lg">
                   Request Custom Quote
                 </Button>
               </Link>

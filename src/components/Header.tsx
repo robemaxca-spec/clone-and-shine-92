@@ -1,20 +1,27 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/blessins-logo.png";
 
 export const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [mouseY, setMouseY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    const handleMouseMove = (e: MouseEvent) => {
+      setMouseY(e.clientY);
+      if (e.clientY < 80) {
+        setIsHovered(true);
+      } else if (e.clientY > 120) {
+        setIsHovered(false);
+      }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   const navigation = [
@@ -27,15 +34,18 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md border-b border-border" : "bg-transparent"
+      className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+        isHovered ? "top-0 bg-background/98 backdrop-blur-md border-b border-border" : "-top-24"
       }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="Blessins Global Solutions" className="h-12 w-auto" />
+          {/* Logo and Brand */}
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="Blessins" className="h-12 w-auto" />
+            <span className="text-2xl font-bold text-foreground tracking-wider">BLESSINS</span>
           </Link>
 
           {/* Desktop Navigation */}
