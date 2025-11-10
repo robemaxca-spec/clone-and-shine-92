@@ -118,10 +118,11 @@ export default function Packages() {
                   }`}
                 >
                   {pkg.highlighted && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
-                      <span className="bg-primary text-primary-foreground px-4 py-1 text-sm font-bold uppercase tracking-wider rounded-full">
-                        Most Popular
-                      </span>
+                    <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 z-10">
+                      <div className="bg-primary text-primary-foreground px-4 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full text-center leading-tight">
+                        <div>MOST</div>
+                        <div>POPULAR</div>
+                      </div>
                     </div>
                   )}
 
