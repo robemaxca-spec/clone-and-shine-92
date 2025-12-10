@@ -54,7 +54,7 @@ export const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-foreground hover:text-primary transition-colors duration-300 font-medium"
+                className="text-foreground hover:text-primary transition-all duration-300 font-medium hover:drop-shadow-[0_0_8px_rgba(234,179,8,0.8)]"
               >
                 {item.name}
               </Link>
@@ -75,7 +75,7 @@ export const Header = () => {
                     key={item.name}
                     to={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-lg text-foreground hover:text-primary transition-colors duration-300 font-medium"
+                    className="text-lg text-foreground hover:text-primary transition-all duration-300 font-medium hover:drop-shadow-[0_0_8px_rgba(234,179,8,0.8)]"
                   >
                     {item.name}
                   </Link>
