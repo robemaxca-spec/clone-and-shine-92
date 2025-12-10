@@ -1,21 +1,26 @@
+import { Link } from "react-router-dom";
+
 const services = [
   {
     title: "INSTAGRAM MARKETING",
     description:
       "Elevate your Instagram presence with stunning visuals, strategic hashtags, and engaging stories that convert followers into customers.",
     image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=2574",
+    link: "/services",
   },
   {
     title: "FACEBOOK ADVERTISING",
     description:
       "Reach your target audience with precision-targeted Facebook ads that deliver measurable results and exceptional ROI for your business.",
     image: "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?q=80&w=2574",
+    link: "/services",
   },
   {
     title: "LINKEDIN STRATEGY",
     description:
       "Build your professional brand with LinkedIn strategies that establish thought leadership and generate quality B2B leads.",
     image: "https://images.unsplash.com/photo-1611944212129-29977ae1398c?q=80&w=2574",
+    link: "/services",
   },
 ];
 
@@ -31,7 +36,11 @@ export const ServicesGrid = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {services.map((service, index) => (
-            <div key={index} className="bg-card/50 backdrop-blur-sm group hover:bg-card transition-all duration-300">
+            <Link 
+              key={index} 
+              to={service.link}
+              className="bg-card/50 backdrop-blur-sm group hover:bg-card transition-all duration-300 block hover:shadow-[0_0_20px_rgba(234,179,8,0.3)]"
+            >
               <div className="h-64 overflow-hidden">
                 <img
                   src={service.image}
@@ -46,7 +55,7 @@ export const ServicesGrid = () => {
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">{service.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
